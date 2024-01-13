@@ -1,0 +1,6 @@
+Gosper curve
+6
+FL
+F 
+L FL-FR--FR+FL++FLFL+FR-
+R +FL-FRFR--FR-FL++FL+FR

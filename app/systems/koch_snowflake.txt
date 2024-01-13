@@ -1,0 +1,4 @@
+Koch snowflake
+6
+F++F++F
+F F-F++F-F

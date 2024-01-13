@@ -12,10 +12,11 @@ class L_System:
     def __init__(self, title, parts, axiom, *theorems):
         self.title = title
         self.rotate_angle = 360 // int(parts)
-        self.instructions = {0: axiom}
+        self.instructions = {1: axiom}
         self.theorems = dict()
         for theorem in theorems:
-            predecessor, follower = theorem.split()
+            # split(" ") using for theorems where no follower
+            predecessor, follower = theorem.split(" ")
             self.theorems[predecessor] = follower
     
     def get_instructions(self, step):
@@ -38,7 +39,7 @@ class L_System:
         return self.instructions[step]
     
     def get_possible_count_steps(self):
-        step = 0
+        step = 1
         while len(self.get_instructions(step)) < 50_000:
             step += 1
 
@@ -90,7 +91,7 @@ class Window(QMainWindow):
             self.line_length.setValue(1)
             self.evolution_step.setValue(1)
         except Exception as e:
-            print(e)
+            print("error", e)
     
     def _change_start_coords(self):
         center_x, center_y = self.center_x.text(), self.center_y.text()
@@ -107,7 +108,7 @@ class Window(QMainWindow):
 
         instructions = self.l_system.get_instructions(self.evolution_step.sliderPosition())
         
-        line_length = self.line_length.sliderPosition()
+        line_length = self.line_length.sliderPosition() * 2
         center_coords = L_System.start_coords
         active_rotate_angle = 0
 
@@ -132,8 +133,6 @@ class Window(QMainWindow):
                 center_coords = save_coords
 
         qp.end()
-
-        print(len(instructions))
     
     def resizeEvent(self, event):
         super().resizeEvent(event)
