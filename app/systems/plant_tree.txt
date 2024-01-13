@@ -1,0 +1,5 @@
+Plant tree
+14
+X
+F FF
+X F+[[X]-X]-F[-FX]+X
