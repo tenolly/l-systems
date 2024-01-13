@@ -14,9 +14,12 @@
    <string>L-systems</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(0, 0, 0);</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <widget class="QGroupBox" name="settings_box">
     <property name="geometry">
      <rect>

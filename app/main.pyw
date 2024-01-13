@@ -1,8 +1,8 @@
 import sys
 from math import cos, sin, radians
 
-from PyQt5 import uic
-from PyQt5.QtGui import QPainter
+from PyQt5 import uic, Qt
+from PyQt5.QtGui import QPainter, QColor, QPalette
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 
 
@@ -14,6 +14,12 @@ class Window(QMainWindow):
         # initial resizeEvent breaks size of slider, self.initial flag is used to avoid it
         self.initial = True
 
+        # QPainter doesn't work with ordinary stylesheets
+        self.palette = QPalette()
+        self.palette.setColor(QPalette.ColorRole(10), QColor(0, 0, 0))
+        self.setAutoFillBackground(True)
+        self.setPalette(self.palette)
+        
         filename = QFileDialog.getOpenFileName(self, "Select a file", "")[0]
         title, parts, axiom, *theorems = open(filename, mode="r", encoding="utf8").read().splitlines()
 
@@ -51,9 +57,10 @@ class Window(QMainWindow):
     
     def paintEvent(self, event):
         instructions = self.get_instructions()
-        
+
         qp = QPainter()
         qp.begin(self)
+        qp.setPen(QColor(255, 0, 255))
         
         center_x, center_y = self.center_x.text(), self.center_y.text()
         if not (center_x.isdigit() and center_y.isdigit()):
