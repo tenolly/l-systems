@@ -52,9 +52,12 @@ class Window(QMainWindow):
         self.setAutoFillBackground(True)
         self.setPalette(self.palette)
 
-        self.l_system = self._initialize_l_system()
-        self.setWindowTitle(self.l_system.title)
+        self.l_system = None
+        self._initialize_l_system()
         self.change_l_system_button.clicked.connect(self._initialize_l_system)
+
+        if self.l_system is not None:
+            self.setWindowTitle(self.l_system.title)
 
         self.pen_color = QColor(255, 0, 255)
         self.choose_color_button.clicked.connect(self._change_color)
@@ -72,8 +75,14 @@ class Window(QMainWindow):
     
     def _initialize_l_system(self):
         filename = QFileDialog.getOpenFileName(self, "Select a file", "")[0]
-        title, parts, axiom, *theorems = open(filename, mode="r", encoding="utf8").read().splitlines()
-        return L_System(title, parts, axiom, *theorems)
+        try:
+            title, parts, axiom, *theorems = open(filename, mode="r", encoding="utf8").read().splitlines()
+            self.l_system = L_System(title, parts, axiom, *theorems)
+
+            self.line_length.setValue(1)
+            self.evolution_step.setValue(1)
+        except Exception as e:
+            print(e)
     
     def _change_start_coords(self):
         center_x, center_y = self.center_x.text(), self.center_y.text()
@@ -81,6 +90,9 @@ class Window(QMainWindow):
             L_System.start_coords = (int(center_x), int(center_y))
     
     def paintEvent(self, event):
+        if self.l_system is None:
+            return
+        
         qp = QPainter()
         qp.begin(self)
         qp.setPen(self.pen_color)
@@ -120,12 +132,14 @@ class Window(QMainWindow):
             e_rect = self.evolution_step.geometry()
             b_rect = self.choose_color_button.geometry()
             g_rect = self.group_box.geometry()
+            c_rect = self.change_l_system_button.geometry()
 
             delta = event.size() - event.oldSize()
             self.line_length.setGeometry(l_rect.x(), l_rect.y(), l_rect.width(), l_rect.height() + delta.height())
             self.evolution_step.setGeometry(e_rect.x(), e_rect.y() + delta.height(), e_rect.width() + delta.width(), e_rect.height())
             self.choose_color_button.setGeometry(b_rect.x(), b_rect.y() + delta.height(), b_rect.width(), b_rect.height())
             self.group_box.setGeometry(g_rect.x() + delta.width(), g_rect.y(), g_rect.width(), g_rect.height())
+            self.change_l_system_button.setGeometry(c_rect.x() + delta.width(), c_rect.y(), c_rect.width(), c_rect.height())
         else:
             self.initial = False
 
