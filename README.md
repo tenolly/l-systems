@@ -18,5 +18,5 @@ Create txt file. L-system's file structure:
     <li>The second line is an integer indicating how many angles the plane is divided into. This parameter is necessary to organize rotations;</li>
     <li>The third line is an axiom;</li>
     <li>The rest are theorems.</li>
-</ul>
+</ul><br>
 Familiarize yourself with the contents of the files in the "app/systems" firectory for more understanding.
