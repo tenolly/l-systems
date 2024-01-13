@@ -112,6 +112,7 @@ class Window(QMainWindow):
         center_coords = L_System.start_coords
         active_rotate_angle = 0
 
+        saved = []
         for instruction in instructions:
             if instruction in ["F", "f"]:
                 new_x = center_coords[0] + round(line_length * cos(radians(active_rotate_angle)))
@@ -128,9 +129,9 @@ class Window(QMainWindow):
             elif instruction == "|":
                 active_rotate_angle += 180
             elif instruction == "[":
-                save_coords = center_coords
+                saved.append([center_coords, active_rotate_angle])
             elif instruction == "]":
-                center_coords = save_coords
+                center_coords, active_rotate_angle = saved.pop()
 
         qp.end()
     
