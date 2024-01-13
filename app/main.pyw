@@ -36,6 +36,13 @@ class L_System:
                 self.instructions[i + 1] += instruction
         
         return self.instructions[step]
+    
+    def get_possible_count_steps(self):
+        step = 0
+        while len(self.get_instructions(step)) < 50_000:
+            step += 1
+
+        return step
 
 
 class Window(QMainWindow):
@@ -78,6 +85,7 @@ class Window(QMainWindow):
         try:
             title, parts, axiom, *theorems = open(filename, mode="r", encoding="utf8").read().splitlines()
             self.l_system = L_System(title, parts, axiom, *theorems)
+            self.evolution_step.setMaximum(self.l_system.get_possible_count_steps())
 
             self.line_length.setValue(1)
             self.evolution_step.setValue(1)
@@ -124,6 +132,8 @@ class Window(QMainWindow):
                 center_coords = save_coords
 
         qp.end()
+
+        print(len(instructions))
     
     def resizeEvent(self, event):
         super().resizeEvent(event)
