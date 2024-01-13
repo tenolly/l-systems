@@ -54,6 +54,7 @@ class Window(QMainWindow):
 
         self.l_system = self._initialize_l_system()
         self.setWindowTitle(self.l_system.title)
+        self.change_l_system_button.clicked.connect(self._initialize_l_system)
 
         self.pen_color = QColor(255, 0, 255)
         self.choose_color_button.clicked.connect(self._change_color)
