@@ -110,7 +110,10 @@ class Window(QMainWindow):
         
         line_length = self.line_length.sliderPosition() * 2
         center_coords = L_System.start_coords
-        active_rotate_angle = 0
+        if self.rotation_angle.text().isdigit():
+            active_rotate_angle = int(self.rotation_angle.text())
+        else:
+            active_rotate_angle = 0
 
         saved = []
         for instruction in instructions:
@@ -142,6 +145,8 @@ class Window(QMainWindow):
             e_rect = self.evolution_step.geometry()
             b_rect = self.choose_color_button.geometry()
             g_rect = self.group_box.geometry()
+            g2_rect = self.group_box_2.geometry()
+            r_rect = self.repaint_button.geometry()
             c_rect = self.change_l_system_button.geometry()
 
             delta = event.size() - event.oldSize()
@@ -149,6 +154,8 @@ class Window(QMainWindow):
             self.evolution_step.setGeometry(e_rect.x(), e_rect.y() + delta.height(), e_rect.width() + delta.width(), e_rect.height())
             self.choose_color_button.setGeometry(b_rect.x(), b_rect.y() + delta.height(), b_rect.width(), b_rect.height())
             self.group_box.setGeometry(g_rect.x() + delta.width(), g_rect.y(), g_rect.width(), g_rect.height())
+            self.group_box_2.setGeometry(g2_rect.x() + delta.width(), g2_rect.y(), g2_rect.width(), g2_rect.height())
+            self.repaint_button.setGeometry(r_rect.x() + delta.width(), r_rect.y(), r_rect.width(), r_rect.height())
             self.change_l_system_button.setGeometry(c_rect.x() + delta.width(), c_rect.y(), c_rect.width(), c_rect.height())
         else:
             self.initial = False
