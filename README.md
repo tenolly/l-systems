@@ -15,7 +15,7 @@ Run the main.pyw file (using a console, you must run it from the "app" directory
 Create txt file. L-system's file structure:
 <ul>
     <li>The first line is the system name;</li>
-    <li>The second line is an integer indicating how many angles the plane is divided into. This parameter is necessary to organize rotations;</li>
+    <li>The second line is a rotation angle;</li>
     <li>The third line is an axiom;</li>
     <li>The rest are theorems.</li>
 </ul><br>
