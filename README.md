@@ -19,4 +19,4 @@ Create txt file. L-system's file structure:
     <li>The third line is an axiom;</li>
     <li>The rest are theorems.</li>
 </ul><br>
-Familiarize yourself with the contents of the files in the "app/systems" firectory for more understanding.
+Familiarize yourself with the contents of the files in the "app/systems" directory for more understanding.
