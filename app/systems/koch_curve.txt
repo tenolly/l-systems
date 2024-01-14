@@ -1,4 +1,4 @@
 Koch curve
-5
+72
 F
 F F-F++F-F

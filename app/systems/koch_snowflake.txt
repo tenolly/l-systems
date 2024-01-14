@@ -1,4 +1,4 @@
 Koch snowflake
-6
+60
 F++F++F
 F F-F++F-F

@@ -1,5 +1,5 @@
 The dragon curve
-4
+90
 X
 X X+YF+
 Y -FX-Y

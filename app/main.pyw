@@ -9,9 +9,9 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QColorDialog
 class L_System:
     start_coords = (400, 400)
 
-    def __init__(self, title, parts, axiom, *theorems):
+    def __init__(self, title, angle, axiom, *theorems):
         self.title = title
-        self.rotate_angle = 360 // int(parts)
+        self.rotate_angle = int(angle)
         self.instructions = {1: axiom}
         self.theorems = dict()
         for theorem in theorems:
@@ -84,8 +84,8 @@ class Window(QMainWindow):
     def _initialize_l_system(self):
         filename = QFileDialog.getOpenFileName(self, "Select a file", "")[0]
         try:
-            title, parts, axiom, *theorems = open(filename, mode="r", encoding="utf8").read().splitlines()
-            self.l_system = L_System(title, parts, axiom, *theorems)
+            title, angle, axiom, *theorems = open(filename, mode="r", encoding="utf8").read().splitlines()
+            self.l_system = L_System(title, angle, axiom, *theorems)
             self.evolution_step.setMaximum(self.l_system.get_possible_count_steps())
 
             self.line_length.setValue(1)

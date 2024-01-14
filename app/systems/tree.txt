@@ -1,5 +1,5 @@
 Tree
-18
+20
 X
 F FF
 X F[+X]F[-X]+X

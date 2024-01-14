@@ -1,5 +1,5 @@
 Plant tree
-14
+25
 X
 F FF
 X F+[[X]-X]-F[-FX]+X
